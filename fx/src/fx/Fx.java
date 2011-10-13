@@ -41,7 +41,8 @@ public class Fx extends Application {
                 System.out.println("Hello World");
             }
         });
-        root.getChildren().add(btn);        
+        root.getChildren().add(btn);            
+        
         primaryStage.setScene(scene);
           primaryStage.show();
     }
