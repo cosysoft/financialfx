@@ -4,14 +4,17 @@
  */
 package com.cosysoft.labs.demo;
 
+import java.util.concurrent.TimeUnit;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.shape.Arc;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -44,16 +47,35 @@ public class SplitPaneDemo extends Application {
             }
         });
 
-        VBox leftBox = new VBox();
-         VBox rightBox = new VBox();
-        
+
+        Task task = new Task<Void>() {
+
+            @Override
+            protected Void call() throws Exception {
+                final int max = 100;
+                for (int i = 1; i <= max; i++) {
+                    updateProgress(i, max);
+                    TimeUnit.MILLISECONDS.sleep(60);
+                }
+                return null;
+            }
+        };
+        ProgressIndicator progressBar = new ProgressIndicator();
+        progressBar.setPrefSize(200d, 90d);
+        progressBar.progressProperty().bind(task.progressProperty());
+
+
+        new Thread(task).start();
+
+        VBox leftBox = VBoxBuilder.create().padding(new Insets(10d)).spacing(10).build();
+        VBox rightBox = VBoxBuilder.create().padding(new Insets(10d)).spacing(10).build();
         Label label2 = new Label("Values");
+
         label2.setFont(new Font("Cambria", 32));
         label2.setRotate(270);
-//        label2.setTranslateY(50);
-        leftBox.getChildren().add(btn);
-        rightBox.getChildren().add(label2);
-        root.getItems().addAll(leftBox,rightBox);
+        leftBox.getChildren().addAll(btn, progressBar);
+        rightBox.getChildren().addAll(new Arc(50d, 50d, 50d, 50d, 200d, 10d),label2);
+        root.getItems().addAll(leftBox, rightBox);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
