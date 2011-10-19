@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<baseTree>
+    <children>
+        <child>
+            <label>第一级节点1</label>
+            <id>0</id>
+            <order>0</order>
+        </child>
+        <child> 
+            <label>第一级节点2</label>
+            <id>0</id>
+            <order>0</order>
+        </child>
+        <child> 
+            <label>第一级节点3</label>
+            <id>0</id>
+            <order>0</order>
+        </child>
+    </children>
+    <id>0</id>
+    <label>父节点</label>
+    <order>0</order>
+</baseTree>

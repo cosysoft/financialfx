@@ -4,6 +4,7 @@
  */
 package com.cosysoft.labs.financialfx.ui;
 
+import com.cosysoft.labs.financialfx.util.TemplateUtil;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -34,8 +35,8 @@ public class Face extends Application {
         
         
         TreeView leftTree = new TreeView();
-        leftTree.setPrefWidth(200d);
-        leftTree.setMaxWidth(200d);
+        
+        leftTree.setRoot(TemplateUtil.buildTreeItem4XML("template/baseTreeData.xml"));
         TabPane  rightPane = new TabPane();
         Tab tab1 = new Tab("初始");
         rightPane.getTabs().addAll(tab1);
